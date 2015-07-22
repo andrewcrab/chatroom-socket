@@ -7,6 +7,9 @@ var server = http.createServer(app);
 server.listen(process.env.PORT, process.env.IP);//To work on c9.io
 
 app.get('/', function(req, res){
-    res.send("<h1>Hello world!</h1>");
-})
+    res.sendFile(__dirname + "/index.html");
+});
 
+process.on('SIGINT',function(){
+    console.log("Existed from web server.");
+});
