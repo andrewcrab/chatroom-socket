@@ -12,13 +12,14 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + "/index.html");
 });
 
-io.on("connection", function(socket){
-    console.log("One user connected.");
-    
-    socket.on("disconnect", function() {
-        console.log("One user disconnected.");
-    });
+io.on('connection', function(socket){
+  socket.on('message', function(msg){
+    console.log(msg)
+    io.emit('message',msg);
+  });
 });
+
+
 
 process.on('SIGINT',function(){
     console.log("\nExisted from web server.");
